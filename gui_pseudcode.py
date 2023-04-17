@@ -3,15 +3,16 @@ import tkinter as tk
 from PIL import ImageTk, Image
 
 # Connect to the ext2 file system
-os.chdir('/path/to/directory')
-
-# Load the file icon image
-file_icon = Image.open('/path/to/file_icon.png')
-file_icon = file_icon.resize((16, 16))
-file_icon = ImageTk.PhotoImage(file_icon)
+os.chdir('/u/miatey/FinalProj/t0.dir')
 
 # Create a Tkinter window
 root = tk.Tk()
+
+# Load the file icon image
+file_icon = Image.open('/u/miatey/FinalProj/file_icon.png')
+file_icon = file_icon.resize((16, 16))
+file_icon = ImageTk.PhotoImage(file_icon)
+
 
 # Create a listbox widget to display the directory contents
 listbox = tk.Listbox(root)
