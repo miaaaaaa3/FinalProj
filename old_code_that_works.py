@@ -88,7 +88,7 @@ for item in os.listdir():
     labels_for_all_icons.append(icon_label)
 
 #make new window to open a dir in a new window on click
-labels_for_all_icons[1].bind("<Button-1>", lambda event: buttonClick("/u/miatey/FinalProj/t0.dir/data"))
+labels_for_all_icons[0].bind("<Button-1>", lambda event: buttonClick("/u/miatey/FinalProj/t0.dir/data"))
 #open all files in a dir on click
 labels_for_all_icons[4].bind("<Button-1>", lambda event: buttonClickImages("/u/miatey/FinalProj/t0.dir/amongus"))
 
