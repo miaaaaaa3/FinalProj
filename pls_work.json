@@ -1,0 +1,10 @@
+{
+    "argv": [
+     "/u/miatey/FinalProj/kernel",
+     "-f",
+     "{connection_file}"
+    ],
+    "display_name": "kernel",
+    "language": "c++"
+   }
+   

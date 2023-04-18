@@ -3,23 +3,36 @@ import tkinter as tk
 from PIL import ImageTk, Image
 import ctypes
 
+#connect kernel to jupyter
+path_to_kernel_spec = '/u/miatey/FinalProj/kernel/my_kernel/kernel.json'
+
+# Launch Jupyter Notebook with the custom kernel
+os.system(f'jupyter notebook --NotebookApp.kernel_spec_manager_class=nb_conda_kernels.CondaKernelSpecManager --kernel=my_kernel --KernelManager.kernel_cmd=/u/miatey/FinalProj/kernel --notebook-dir=/u/miatey/FinalProj')
+
+#MAKE MY OWN CHDIR INSTEAD OF PYTHON'S
+def my_chdir(directory):
+    kernel = ctypes.CDLL("/u/miatey/FinalProj/kernel")
+    kernel.open(directory)
+
+
 #THIS SECTION CALLS THE OPEN SYSCALL
-libc = ctypes.CDLL('libc.so.6') # load the C library
-filename = '/u/miatey/FinalProj/t0.dir'
-flags = os.O_RDONLY
-fd = libc.open(filename, flags)# Call the open() system call
-if fd < 0:
-    print("Failed to open file")
-else:
-    print(f"File opened successfully with file descriptor {fd}")
-    # do something with the file
+# libc = ctypes.CDLL('libc.so.6') # load the C library
+# filename = '/u/miatey/FinalProj/t0.dir'
+# flags = os.O_RDONLY
+# fd = libc.open(filename, flags)# Call the open() system call
+# if fd < 0:
+#     print("Failed to open file")
+# else:
+#     print(f"File opened successfully with file descriptor {fd}")
+#     # do something with the file
 
 
 #set dir we want to first open
-PARENT_DIR = '/u/miatey/FinalProj/t0.dir'
+PARENT_DIR = '/u/miatey/FinalProj'
 
 #connect to the ext2 file system
-os.chdir(PARENT_DIR)
+# os.chdir(PARENT_DIR)
+my_chdir(PARENT_DIR)
 
 #create a Tkinter window
 root = tk.Tk()
@@ -164,3 +177,4 @@ for item in os.listdir():
 #start
 starting_dir.pack()
 root.mainloop()
+libc.close(fd) # don't forget to close the file when done
