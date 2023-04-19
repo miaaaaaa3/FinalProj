@@ -3,53 +3,6 @@ import tkinter as tk
 from PIL import ImageTk, Image
 import ctypes
 
-#THIS SECTION CALLS THE OPEN SYSCALL
-libc = ctypes.CDLL('libc.so.6') # load the C library
-filename = '/u/miatey/FinalProj/t0.dir'
-flags = os.O_RDONLY
-fd = libc.open(filename, flags)# Call the open() system call
-if fd < 0:
-    print("Failed to open file")
-else:
-    print(f"File opened successfully with file descriptor {fd}")
-    # do something with the file
-
-
-#set dir we want to first open
-PARENT_DIR = '/u/miatey/FinalProj/t0.dir'
-
-#connect to the ext2 file system
-os.chdir(PARENT_DIR)
-
-#create a Tkinter window
-root = tk.Tk()
-
-#load dir icon
-dir_icon = Image.open('/u/miatey/FinalProj/dir_icon.png')
-dir_icon = dir_icon.resize((16, 16))
-dir_icon = ImageTk.PhotoImage(dir_icon)
-
-#load file icon
-file_icon = Image.open('/u/miatey/FinalProj/file_icon.png')
-file_icon = file_icon.resize((16, 16))
-file_icon = ImageTk.PhotoImage(file_icon)
-
-#load image icon
-image_icon = Image.open('/u/miatey/FinalProj/image_icon.png')
-image_icon = image_icon.resize((16, 16))
-image_icon = ImageTk.PhotoImage(image_icon)
-
-#if its a file, is it an img or txt?
-def is_image_file(file_path):
-    #get the file extension
-    ext = os.path.splitext(file_path)[1].lower()
-    return ext in ['.png']
-
-# def is_text_file(file_path):
-#     #get the file extension
-#     ext = os.path.splitext(file_path)[1].lower()
-#     return ext in ['.txt']
-
 from functools import partial
 #kesha's attempt to open all images in curr directory
 # from functools import partial
@@ -60,20 +13,7 @@ def buttonClickImages(img_path):
     # for image in images:
     #     print("Inside loop")
     #     os.system("xli " + img_path + "/" +image)
-    os.system("xli " +img_path)
 
-def buttonClickText(txt_path):
-    # Create a new window
-    text_window = tk.Toplevel(root)
-    text_window.title(txt_path)
-    text_widget = tk.Text(text_window)
-    text_widget.pack()
-
-    #get text
-    input_file = open(txt_path, "r")
-    text = input_file.read()
-    input_file.close()
-    text_widget.insert(tk.END, text) #insert the text
 
 
 def buttonClickChildDir(path):
